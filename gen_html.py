@@ -16,12 +16,12 @@ with open('wangjoa.json', 'r') as f:
 post_list = sorted(post_list, key=lambda post: (post['name'], post['url']))
 
 post_html_list = [''.join([
-    '<p class="post">\n',
+    '<div class="post">\n',
     '<div class="title">\n',
     '<span class="name"><a href="{0}">{1}</a></span> / <span class="location">{2}</span>\n'.format(post['url'], post['name'], post['location_detail']),
     '</div>\n',            
     '<span class="excerpt">{0}</span>\n'.format(post['excerpt']),
-    '</p>\n']) for post in post_list]
+    '</div>\n']) for post in post_list]
 
 content = ''.join(post_html_list)
 
