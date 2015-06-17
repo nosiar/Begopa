@@ -13,4 +13,5 @@ class WangjoaItem(scrapy.Item):
     name = scrapy.Field()
     location = scrapy.Field()
     location_detail = scrapy.Field()
+    date = scrapy.Field()
     excerpt = scrapy.Field()

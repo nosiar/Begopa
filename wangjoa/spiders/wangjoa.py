@@ -7,6 +7,7 @@ from scrapy.http import Request
 from scrapy.contrib.spiders import CrawlSpider, Rule
 from scrapy.contrib.linkextractors import LinkExtractor
 from wangjoa.items import WangjoaItem
+import time
 
 class WangjoaSpider(Spider):
 
@@ -35,13 +36,17 @@ class WangjoaSpider(Spider):
             location = post.xpath('p[@class="tit"]/a/text()')[0].extract().split('/')
             if len(location) < 2:
                 continue
-            
+
+            date = post.xpath('p[@class="tit"]/span/input/@value')[0].extract()
+            date = time.strptime(date, '%a %b %d %H:%M:%S %Z %Y')
+
             item = WangjoaItem()
-            item['url'] = post.xpath('p[@class="tit"]/a/@href')[0].extract();
+            item['url'] = post.xpath('p[@class="tit"]/a/@href')[0].extract()
             item['name'] = location[1].strip()
-            item['location'] = post.xpath('p[@class="tit"]/span/text()')[0].extract();
+            item['location'] = post.xpath('p[@class="tit"]/span/text()')[0].extract()
             item['location_detail'] = location[0].strip()
-            item['excerpt'] = post.xpath('p[@class="con"]/a/text()')[0].extract();
+            item['date'] = time.strftime('%Y.%m.%d', date)
+            item['excerpt'] = post.xpath('p[@class="con"]/a/text()')[0].extract()
 
             yield item
 
