@@ -13,7 +13,7 @@ call(['scrapy', 'crawl', '-o', 'wangjoa.json', 'wangjoa'])
 with open('wangjoa.json', 'r') as f:
     post_list = json.loads(f.read())
 
-post_list = sorted(post_list, key=lambda post: (post['name'], post['url']))
+post_list = sorted(post_list, key=lambda post: (post['name'], post['date']))
 
 post_html_list = [''.join([
     '<div class="post">\n',
