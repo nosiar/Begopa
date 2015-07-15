@@ -30,6 +30,6 @@ with open('template.html', 'r') as f:
 
 html = html.replace('{{content}}', content)
 
-with open('begopa.html', 'w') as f:
+with open('../index.html', 'w') as f:
     f.write(html)
 
