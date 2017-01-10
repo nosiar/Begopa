@@ -19,7 +19,7 @@ post_html_list = [''.join([
     '<div class="post">\n',
     '<div class="title">\n',
     '<span class="name"><a href="{0}">{1}</a></span> / <span class="location">{2}</span><span class="date">{3}</span>\n'.format(post['url'], post['name'], post['location_detail'], post['date']),
-    '</div>\n',            
+    '</div>\n',
     '<span class="excerpt">{0}</span>\n'.format(post['excerpt']),
     '</div>\n']) for post in post_list]
 
@@ -32,4 +32,3 @@ html = html.replace('{{content}}', content)
 
 with open('../index.html', 'w') as f:
     f.write(html)
-

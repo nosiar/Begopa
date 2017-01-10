@@ -4,10 +4,9 @@ from __future__ import absolute_import
 from scrapy.spider import Spider
 from scrapy.selector import Selector
 from scrapy.http import Request
-from scrapy.contrib.spiders import CrawlSpider, Rule
-from scrapy.contrib.linkextractors import LinkExtractor
 from wangjoa.items import WangjoaItem
 import time
+
 
 class WangjoaSpider(Spider):
 
@@ -22,7 +21,7 @@ class WangjoaSpider(Spider):
         page_list = sel.xpath('//table[@class="page-navigation"]/tr/td/a/text()').extract()
         for page in page_list:
             yield Request(self.url_format.format(page), callback=self.parse_page)
-      
+
         has_next_page = sel.xpath('//table[@class="page-navigation"]/tr/td/a/span[@class="arw"]/text()')[0].extract() == u'▶'
         if(has_next_page):
             yield Request(self.url_format.format(int(page_list[-1]) + 1), callback=self.parse, dont_filter=True)
@@ -49,4 +48,3 @@ class WangjoaSpider(Spider):
             item['excerpt'] = post.xpath('p[@class="con"]/a/text()')[0].extract()
 
             yield item
-
